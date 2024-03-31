@@ -339,3 +339,9 @@
         padding: 1.5vw 0;
     }
 }
+
+@media (max-width: 500px) {
+    .mentContainer > p {
+        padding-top: 65lvh;
+    }
+}

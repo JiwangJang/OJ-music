@@ -4,17 +4,19 @@ import "@/public/css/globals.css";
 import Footer from "@/components/layoutComp/Footer";
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang='ko'>
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
+    return (
+        <html lang='ko'>
+            <body>
+                <div style={{ overflowX: "hidden" }}>
+                    <Header />
+                    {children}
+                    <Footer />
+                </div>
+            </body>
+        </html>
+    );
 }

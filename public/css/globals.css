@@ -18,7 +18,6 @@
 
 body {
     background-color: #181818;
-    overflow-x: hidden;
 }
 
 * {
@@ -48,11 +47,6 @@ body {
 
 .desktop-body {
     font-size: 32px;
-    font-weight: normal;
-}
-
-.mobile-body {
-    font-size: 16px;
     font-weight: normal;
 }
 
@@ -161,8 +155,8 @@ footer ul {
 @media (max-width: 1220px) {
     .container,
     footer {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .head-1 {
@@ -236,8 +230,46 @@ footer ul {
         left: 0%;
         bottom: -2px;
     }
+
+    #header-logo {
+        width: 180px;
+    }
 }
 
+@media (max-width: 500px) {
+    header {
+        height: 80px;
+    }
+
+    #header-logo {
+        width: 120px;
+    }
+
+    #menu-open-btn {
+        width: 48px;
+    }
+
+    #header-container nav ul {
+        right: -60vw;
+        width: 60vw;
+    }
+
+    .head-1 {
+        font-size: 50px;
+    }
+
+    .head-4 {
+        font-size: 18px;
+    }
+
+    .desktop-body {
+        font-size: 16px;
+    }
+
+    .full-vh {
+        display: block;
+    }
+}
 /* gsap 쓰기 까다로워서 직접만드는 스크롤 기반 애니메이션 */
 #differents,
 #available {
