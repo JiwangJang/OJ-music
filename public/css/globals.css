@@ -1,0 +1,253 @@
+@font-face {
+    font-family: Pretendard;
+    src: url(/fonts/Pretendard-ExtraBold.otf);
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: Pretendard;
+    src: url(/fonts/Pretendard-Bold.otf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Pretendard;
+    src: url(/fonts/Pretendard-regular.otf);
+    font-weight: normal;
+}
+
+body {
+    background-color: #181818;
+    overflow-x: hidden;
+}
+
+* {
+    font-family: Pretendard;
+    letter-spacing: -0.04em;
+    color: white;
+    box-sizing: border-box;
+}
+
+.head-1 {
+    font-size: 121px;
+    font-weight: bolder;
+}
+.head-2 {
+    font-size: 81px;
+    font-weight: bolder;
+}
+.head-3 {
+    font-size: 54px;
+    font-weight: bold;
+}
+
+.head-4 {
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.desktop-body {
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.mobile-body {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.division-padding {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+.full-vh {
+    height: 100lvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    transform: translateY(-100%);
+    z-index: 10;
+    height: 120px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #181818, #18181800);
+    display: flex;
+    align-items: center;
+    transition: all 0.4s ease-in-out;
+}
+
+#header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+header nav ul {
+    display: flex;
+    gap: 24px;
+    font-size: 24px;
+}
+
+header nav ul li {
+    position: relative;
+    display: block;
+}
+
+header nav ul li::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0%;
+    height: 4px;
+    background-color: #6100ff;
+    transition: all 0.2s ease-in-out;
+}
+
+header nav ul li.active::after {
+    width: 100%;
+    left: 0;
+}
+
+header nav ul li:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+footer {
+    background-color: black;
+    height: 200px;
+    display: flex;
+    align-items: center;
+}
+
+#footer-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#footer-logo {
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#menu-open-btn,
+#menu-close-btn {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 1220px) {
+    .container,
+    footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .head-1 {
+        font-size: 10vw;
+    }
+
+    .head-3 {
+        font-size: 4.2vw;
+    }
+
+    .head-4 {
+        font-size: 2.3vw;
+    }
+
+    .desktop-body {
+        font-size: 2.7vw;
+    }
+
+    .division-padding {
+        padding-top: 8vh;
+        padding-bottom: 8vh;
+    }
+}
+
+@media (max-width: 800px) {
+    #menu-open-btn,
+    #menu-close-btn {
+        display: block;
+    }
+
+    #header-container nav {
+        visibility: hidden;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100lvh;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: all 0.2s;
+    }
+
+    #header-container nav.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #header-container nav ul {
+        position: absolute;
+        top: 0;
+        right: -40vw;
+        width: 40vw;
+        height: 100%;
+        padding: 4vw;
+        display: block;
+        background-color: #181818;
+        transition: all 0.3s;
+        transition-delay: 0.2s;
+    }
+
+    #header-container nav.active ul {
+        right: 0;
+    }
+
+    #header-container nav ul li {
+        padding: 16px 0px 16px 4px;
+        border-bottom: 1px solid #747474;
+    }
+
+    header nav ul li::after {
+        left: 0%;
+        bottom: -2px;
+    }
+}
+
+/* gsap 쓰기 까다로워서 직접만드는 스크롤 기반 애니메이션 */
+#differents,
+#available {
+    opacity: 0;
+    transform: translateY(10%);
+    transition: all 1s;
+}
+
+#differents.active,
+#available.active {
+    opacity: 1;
+    transform: translateY(0);
+}
