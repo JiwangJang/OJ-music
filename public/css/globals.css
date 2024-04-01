@@ -236,7 +236,8 @@ footer ul {
         bottom: -2px;
     }
 
-    #header-logo {
+    #header-logo,
+    #footer-logo {
         width: 180px;
         height: auto;
     }
@@ -251,7 +252,8 @@ footer ul {
         height: 80px;
     }
 
-    #header-logo {
+    #header-logo,
+    #footer-logo {
         width: 120px;
         height: auto;
     }

@@ -446,4 +446,52 @@
     .contactForm button {
         height: 50px !important;
     }
+
+    .testimonialContainer {
+        display: flex;
+        gap: 8px;
+    }
+
+    .testimonialImage {
+        margin: 0 auto;
+        width: 74px;
+        height: 74px;
+        border-radius: 9999px;
+    }
+
+    .testimonialCard {
+        width: 164px;
+        height: 210px;
+        padding: 24px 16px 16px 16px;
+        background-color: #dadef6;
+        border-radius: 10px;
+        display: block;
+        overflow: hidden;
+        flex-shrink: 0;
+        gap: 16px;
+    }
+
+    .testimonialCard::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background-color: #9797ff;
+        clip-path: polygon(0 0, 100% 0%, 100% 60%, 0% 100%);
+    }
+
+    .reviewContent {
+        margin-top: 12px;
+        font-size: 16px;
+    }
+    .reviewAuthor {
+        font-size: 14px;
+    }
+
+    .rightBtn,
+    .leftBtn {
+        display: none;
+    }
 }

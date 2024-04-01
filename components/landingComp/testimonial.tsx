@@ -2,7 +2,7 @@
 
 import style from "@/app/landing.module.css";
 import TestimonialCard from "./testimonialComp/TestimonialCard";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, TouchEvent, useEffect, useRef, useState } from "react";
 
 export default function Testmonial() {
     const [isStart, setIsStart] = useState(true);
@@ -14,19 +14,20 @@ export default function Testmonial() {
     const isClickRef = useRef<boolean>(false);
     const setTimeoutRef = useRef<NodeJS.Timeout>();
     const slideWidth = useRef<number>(0);
-    // slideWidth * 4 = 전체 슬라이더 넓이
+    // slideWidth * 4 = 전체 슬라이더 넓이(Desktop)
+    // slideWidth * 12 = 전체 슬라이더 넓이(Moblie)
 
     useEffect(() => {
         const isMobile = /Mobi/i.test(window.navigator.userAgent);
         setIsMoblie(isMobile);
+        const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
+        if (testimonialCard) {
+            if (isMobile) slideWidth.current = testimonialCard.offsetWidth + 8;
+            else slideWidth.current = testimonialCard.offsetWidth + 12;
+        }
     }, []);
 
     if (typeof window !== "undefined") {
-        const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
-        if (testimonialCard) {
-            slideWidth.current = testimonialCard.offsetWidth + 12;
-        }
-
         window.addEventListener("resize", () => {
             const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
             if (testimonialCard) {
@@ -153,7 +154,6 @@ export default function Testmonial() {
         if (!isClickRef.current) return;
         clearTimeout(setTimeoutRef.current);
         const totalWidth = slideWidth.current * 4;
-        console.log(slideWidth.current * 4);
         posRef.current = e.pageX - firstPointRef.current;
         if (posRef.current < -totalWidth) posRef.current = -totalWidth;
         if (posRef.current > 0) posRef.current = 0;
@@ -214,11 +214,32 @@ export default function Testmonial() {
         testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
     };
 
+    const touchStartEvent = (e: TouchEvent) => {
+        if (!testimonialRef.current) return;
+        firstPointRef.current = e.targetTouches[0].pageX - posRef.current;
+        isClickRef.current = true;
+    };
+    const touchEndEvent = () => {
+        if (!testimonialRef.current) return;
+        isClickRef.current = false;
+    };
+    const touchMoveEvent = (e: TouchEvent) => {
+        if (!testimonialRef.current) return;
+        if (!isClickRef.current) return;
+        const totalWidth = slideWidth.current * 12 - innerWidth - 20;
+        posRef.current = e.targetTouches[0].pageX - firstPointRef.current;
+        if (posRef.current < -totalWidth) posRef.current = -totalWidth;
+        if (posRef.current > 0) posRef.current = 0;
+        testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
+    };
+
     return (
-        <div className="container division-padding" style={{ userSelect: "none" }}>
-            <p className="head-1">수강생 후기</p>
-            <div className="desktop-body" style={{ display: "flex", justifyContent: "space-between" }}>
-                <p style={{ display: "flex", alignItems: "center" }}>실제 수강생의 생생한 후기를 읽어보세요</p>
+        <div className='container division-padding' style={{ userSelect: "none" }}>
+            <p className='head-1'>수강생 후기</p>
+            <div className='desktop-body' style={{ display: "flex", justifyContent: "space-between" }}>
+                <p style={{ display: "flex", alignItems: "center", marginBottom: isMobile ? "8px" : "" }}>
+                    실제 수강생의 생생한 후기를 읽어보세요
+                </p>
                 <div className={style.utilBtns}>
                     {/* 한쪽 끝에 도달하면 opacity를 0.3으로 만듦 */}
                     <div className={style.leftBtn} onClick={prevSlide} style={{ opacity: isStart ? 0.3 : 1 }}></div>
@@ -231,6 +252,9 @@ export default function Testmonial() {
                 onMouseDown={mouseDownEvent}
                 onMouseUp={mouseUpEvent}
                 onMouseMove={mouseMoveEvent}
+                onTouchStart={touchStartEvent}
+                onTouchEnd={touchEndEvent}
+                onTouchMove={touchMoveEvent}
                 style={{ cursor: "grab" }}
             >
                 {isMobile ? (
