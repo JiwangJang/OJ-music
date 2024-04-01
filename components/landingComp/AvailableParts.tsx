@@ -8,49 +8,49 @@ export default function AvailableParts() {
                 가능한 과목
             </p>
             <div className={style.availableContainer}>
-                <div className={style.imageContainer} style={{ gridRow: "1/3", gridColumn: "1/6" }}>
+                <div className={style.imageContainer}>
                     <Image
                         src={"/image/landing/piano.jpg"}
                         alt='피아노사진'
-                        className={style.image}
                         fill
                         sizes='100%'
+                        style={{objectFit : "cover"}}
                     ></Image>
                 </div>
-                <div className={style.imageContainer} style={{ gridRow: "1", gridColumn: "6/9" }}>
+                <div className={style.imageContainer}>
                     <Image
                         src={"/image/landing/drum.jpg"}
                         alt='드럼사진'
-                        className={style.image}
                         fill
                         sizes='100%'
+                        style={{objectFit : "cover"}}
                     ></Image>
                 </div>
-                <div className={style.imageContainer} style={{ gridRow: "1", gridColumn: "9/13" }}>
+                <div className={style.imageContainer}>
                     <Image
                         src={"/image/landing/elec-guitar.jpg"}
                         alt='일렉기타사진'
-                        className={style.image}
                         fill
                         sizes='100%'
+                        style={{objectFit : "cover"}}
                     ></Image>
                 </div>
-                <div className={style.imageContainer} style={{ gridRow: "2", gridColumn: "6/10" }}>
+                <div className={style.imageContainer}>
                     <Image
                         src={"/image/landing/base.jpg"}
                         alt='베이스사진'
-                        className={style.image}
                         fill
                         sizes='100%'
+                        style={{objectFit : "cover"}}
                     ></Image>
                 </div>
-                <div className={style.imageContainer} style={{ gridRow: "2", gridColumn: "10/13" }}>
+                <div className={style.imageContainer}>
                     <Image
                         src={"/image/landing/more.jpg"}
                         alt='더보기'
-                        className={style.image}
                         fill
                         sizes='100%'
+                        style={{objectFit : "cover"}}
                     ></Image>
                 </div>
             </div>

@@ -2,11 +2,12 @@
 
 import style from "@/app/landing.module.css";
 import TestimonialCard from "./testimonialComp/TestimonialCard";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 
 export default function Testmonial() {
     const [isStart, setIsStart] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const [isMobile, setIsMoblie] = useState(false);
     const testimonialRef = useRef<HTMLDivElement>(null);
     const posRef = useRef<number>(0);
     const firstPointRef = useRef<number>(0);
@@ -14,6 +15,11 @@ export default function Testmonial() {
     const setTimeoutRef = useRef<NodeJS.Timeout>();
     const slideWidth = useRef<number>(0);
     // slideWidth * 4 = 전체 슬라이더 넓이
+
+    useEffect(() => {
+        const isMobile = /Mobi/i.test(window.navigator.userAgent);
+        setIsMoblie(isMobile);
+    }, []);
 
     if (typeof window !== "undefined") {
         const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
@@ -209,9 +215,9 @@ export default function Testmonial() {
     };
 
     return (
-        <div className='container division-padding' style={{ userSelect: "none" }}>
-            <p className='head-1'>수강생 후기</p>
-            <div className='desktop-body' style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className="container division-padding" style={{ userSelect: "none" }}>
+            <p className="head-1">수강생 후기</p>
+            <div className="desktop-body" style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ display: "flex", alignItems: "center" }}>실제 수강생의 생생한 후기를 읽어보세요</p>
                 <div className={style.utilBtns}>
                     {/* 한쪽 끝에 도달하면 opacity를 0.3으로 만듦 */}
@@ -227,16 +233,26 @@ export default function Testmonial() {
                 onMouseMove={mouseMoveEvent}
                 style={{ cursor: "grab" }}
             >
-                <div className={style.cardContainer}>
-                    {dummyData1.map((data) => (
-                        <TestimonialCard key={data.id} data={data} />
-                    ))}
-                </div>
-                <div className={style.cardContainer}>
-                    {dummyData2.map((data) => (
-                        <TestimonialCard key={data.id} data={data} />
-                    ))}
-                </div>
+                {isMobile ? (
+                    <>
+                        {dummyData1.concat(dummyData2).map((data) => (
+                            <TestimonialCard key={data.id} data={data} />
+                        ))}
+                    </>
+                ) : (
+                    <>
+                        <div className={style.cardContainer}>
+                            {dummyData1.map((data) => (
+                                <TestimonialCard key={data.id} data={data} />
+                            ))}
+                        </div>
+                        <div className={style.cardContainer}>
+                            {dummyData2.map((data) => (
+                                <TestimonialCard key={data.id} data={data} />
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

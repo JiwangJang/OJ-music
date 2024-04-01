@@ -23,7 +23,7 @@ export default function Differents() {
     ];
     return (
         <div className='container division-padding' id='differents'>
-            <p className='head-1' style={{ textAlign: "center", marginBottom: "36px" }}>
+            <p className='head-1'>
                 저희는 다릅니다!
             </p>
             <div className={styles.differentsContainer}>
