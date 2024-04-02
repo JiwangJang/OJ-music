@@ -3,17 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface PathDatas {
     name: string;
     content: string;
     key: number;
 }
-
-gsap.registerPlugin(useGSAP);
 
 export default function Header() {
     const menuRef = useRef<HTMLElement>(null);
@@ -72,43 +68,41 @@ export default function Header() {
         }
     }, [pathname]);
 
-    useGSAP(() => {
-        gsap.to("header", { y: 0 });
-    });
+    if (typeof window !== "undefined") window.addEventListener("scroll", scrollEvent);
 
-    if (typeof window !== "undefined") {
-        window.addEventListener("scroll", scrollEvent);
-    }
+    useEffect(() => {
+        if (headerRef.current) headerRef.current.classList.add("active");
+    }, []);
 
-    const menuOpen = () => {
+    const menuOpen = useCallback(() => {
         if (!menuRef.current) return;
         menuRef.current.classList.add("active");
         document.body.style.overflowY = "hidden";
-    };
+    }, []);
 
-    const menuClose = () => {
+    const menuClose = useCallback(() => {
         if (!menuRef.current) return;
         menuRef.current.classList.remove("active");
         document.body.style.overflowY = "auto";
-    };
+    }, []);
     return (
         <header ref={headerRef}>
-            <div id="header-container" className="container">
+            <div id='header-container' className='container'>
                 <Link href={"/"}>
                     <Image
                         src={"/svg/logo.svg"}
                         width={205}
                         height={74}
-                        alt="오제이음악학원로고"
-                        id="header-logo"
+                        alt='오제이음악학원로고'
+                        id='header-logo'
                     ></Image>
                 </Link>
                 <Image
                     src={"/svg/menu.svg"}
                     width={64}
                     height={64}
-                    alt="메뉴열기"
-                    id="menu-open-btn"
+                    alt='메뉴열기'
+                    id='menu-open-btn'
                     onClick={menuOpen}
                 ></Image>
                 <nav ref={menuRef} onClick={menuClose}>
@@ -117,13 +111,13 @@ export default function Header() {
                             src={"/svg/close.svg"}
                             width={48}
                             height={48}
-                            alt="메뉴닫기"
-                            id="menu-close-btn"
+                            alt='메뉴닫기'
+                            id='menu-close-btn'
                             onClick={menuClose}
                         ></Image>
                         {pathData.map(({ name, content, key }) => (
                             <li className={name === pathname ? "active" : ""} key={key}>
-                                <Link href={name} className="nav-link">
+                                <Link href={name} className='nav-link'>
                                     {content}
                                 </Link>
                             </li>

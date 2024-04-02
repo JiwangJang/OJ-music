@@ -78,7 +78,12 @@ header {
     background: linear-gradient(to bottom, #181818, #18181800);
     display: flex;
     align-items: center;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition-delay: 0.5s;
+}
+
+header.active {
+    transform: translateY(0);
 }
 
 #header-container {
@@ -332,4 +337,11 @@ footer ul {
 #available.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* 학원소개부분 카카오맵 */
+#map {
+    height: 70vw;
+    max-height: 670px;
+    width: 100%;
 }

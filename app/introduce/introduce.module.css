@@ -15,10 +15,51 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 0.3;
+    opacity: 0.4;
 }
 
-.introImage img {
+.introImage > img {
     object-fit: cover;
     object-position: right center;
+}
+
+.introMentContainer {
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(10%);
+    transition: all 0.5s;
+}
+
+.academyIntroduceContainer {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+}
+
+.introduceArticle {
+    grid-column: 1/9;
+}
+
+.introduceArticle > p {
+    margin-bottom: 12px;
+}
+
+.outlookImage {
+    grid-column: 9/13;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fadeOut {
+    height: 120px;
+    background: linear-gradient(to top, #181818, #18181800);
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.address {
+    padding-top: 8px;
+    padding-bottom: 16px;
 }
