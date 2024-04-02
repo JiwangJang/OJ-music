@@ -1,3 +1,10 @@
+import JazzExplain from "@/components/whatIsJazzComp/JazzExplain";
+import style from "@/app/what-is-jazz/whatIsJazz.module.css";
+
 export default function Page() {
-  return <div>재즈란 무엇인가</div>;
+    return (
+        <div className={style.JazzExpainContainer}>
+            <JazzExplain />
+        </div>
+    );
 }

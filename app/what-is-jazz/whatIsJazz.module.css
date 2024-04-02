@@ -1,0 +1,86 @@
+.JazzExpainContainer {
+    background-image: url(/image/what-is-jazz/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+.JazzExpainContainer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.3;
+}
+
+.contentContainer {
+    position: relative;
+    z-index: 2;
+}
+
+.contentContainer > p {
+    border-bottom: 2px solid #6100ff;
+    padding: 28px 0px 12px 0px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    margin-top: 16px;
+    gap: 24px;
+    height: 40vh;
+}
+
+.article {
+    grid-column: 1/8;
+    font-size: 36px;
+}
+
+.image {
+    grid-column: 8/13;
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.image img {
+    object-fit: cover;
+}
+
+@media (max-width: 1220px) {
+    .article {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+        gap: 8px;
+        height: 70vw;
+    }
+
+    .image {
+        object-position: top center;
+    }
+
+    .JazzExpainContainer {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 500px) {
+    .article {
+        font-size: 16px;
+    }
+}
