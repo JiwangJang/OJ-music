@@ -50,6 +50,7 @@ export default function Header() {
     const scrollEvent = useCallback(() => {
         if (!headerRef.current) return;
         const scrollY = window.scrollY;
+        if (scrollY <= 0) headerRef.current.style.transform = "translateY(0%)";
         if (prevScrollRef.current < scrollY) {
             headerRef.current.style.transform = "translateY(-100%)";
         }
@@ -92,22 +93,22 @@ export default function Header() {
     };
     return (
         <header ref={headerRef}>
-            <div id='header-container' className='container'>
+            <div id="header-container" className="container">
                 <Link href={"/"}>
                     <Image
                         src={"/svg/logo.svg"}
                         width={205}
                         height={74}
-                        alt='오제이음악학원로고'
-                        id='header-logo'
+                        alt="오제이음악학원로고"
+                        id="header-logo"
                     ></Image>
                 </Link>
                 <Image
                     src={"/svg/menu.svg"}
                     width={64}
                     height={64}
-                    alt='메뉴열기'
-                    id='menu-open-btn'
+                    alt="메뉴열기"
+                    id="menu-open-btn"
                     onClick={menuOpen}
                 ></Image>
                 <nav ref={menuRef} onClick={menuClose}>
@@ -116,13 +117,13 @@ export default function Header() {
                             src={"/svg/close.svg"}
                             width={48}
                             height={48}
-                            alt='메뉴닫기'
-                            id='menu-close-btn'
+                            alt="메뉴닫기"
+                            id="menu-close-btn"
                             onClick={menuClose}
                         ></Image>
                         {pathData.map(({ name, content, key }) => (
                             <li className={name === pathname ? "active" : ""} key={key}>
-                                <Link href={name} className='nav-link'>
+                                <Link href={name} className="nav-link">
                                     {content}
                                 </Link>
                             </li>

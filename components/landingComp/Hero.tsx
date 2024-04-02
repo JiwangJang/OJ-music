@@ -16,7 +16,7 @@ export default function Hero() {
     return (
         <div className={styles.landingContainer}>
             <div className={styles.videoContainer}>
-                <video className={styles.video} src="/video/landing.mp4" autoPlay loop muted></video>
+                <video className={styles.video} src="/video/landing.mp4" autoPlay loop muted playsInline></video>
             </div>
             <div className={`${styles.mentContainer} container full-vh `} ref={mentRef}>
                 <p className="head-1">

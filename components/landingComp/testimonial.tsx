@@ -216,6 +216,7 @@ export default function Testmonial() {
 
     const touchStartEvent = (e: TouchEvent) => {
         if (!testimonialRef.current) return;
+        if (isClickRef.current) return;
         firstPointRef.current = e.targetTouches[0].pageX - posRef.current;
         isClickRef.current = true;
     };
@@ -226,7 +227,7 @@ export default function Testmonial() {
     const touchMoveEvent = (e: TouchEvent) => {
         if (!testimonialRef.current) return;
         if (!isClickRef.current) return;
-        const totalWidth = slideWidth.current * 12 - innerWidth - 20;
+        const totalWidth = slideWidth.current * 12 - innerWidth + 20;
         posRef.current = e.targetTouches[0].pageX - firstPointRef.current;
         if (posRef.current < -totalWidth) posRef.current = -totalWidth;
         if (posRef.current > 0) posRef.current = 0;
@@ -234,9 +235,9 @@ export default function Testmonial() {
     };
 
     return (
-        <div className='container division-padding' style={{ userSelect: "none" }}>
-            <p className='head-1'>수강생 후기</p>
-            <div className='desktop-body' style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className="container division-padding" style={{ userSelect: "none" }}>
+            <p className="head-1">수강생 후기</p>
+            <div className="desktop-body" style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ display: "flex", alignItems: "center", marginBottom: isMobile ? "8px" : "" }}>
                     실제 수강생의 생생한 후기를 읽어보세요
                 </p>
