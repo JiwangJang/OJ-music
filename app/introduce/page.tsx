@@ -1,3 +1,9 @@
+import IntroduceIntro from "@/components/introduceComp/IntroduceIntro";
+
 export default function Page() {
-  return <div>학원소개페이지임</div>;
+    return (
+        <div>
+            <IntroduceIntro />
+        </div>
+    );
 }

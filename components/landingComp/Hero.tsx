@@ -14,7 +14,7 @@ export default function Hero() {
     });
 
     return (
-        <div className={styles.landingContainer}>
+        <div className="full-vh">
             <div className={styles.videoContainer}>
                 <video className={styles.video} src="/video/landing.mp4" autoPlay loop muted playsInline></video>
             </div>
