@@ -18,8 +18,9 @@ export default function Testmonial() {
     // slideWidth * 12 = 전체 슬라이더 넓이(Moblie)
 
     useEffect(() => {
-        const isMobile = /Mobi/i.test(window.navigator.userAgent);
+        const isMobile = window.innerWidth < 500;
         setIsMoblie(isMobile);
+        console.log(window.navigator.userAgent);
         const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
         if (testimonialCard) {
             if (isMobile) slideWidth.current = testimonialCard.offsetWidth + 8;
@@ -223,11 +224,20 @@ export default function Testmonial() {
     const touchEndEvent = () => {
         if (!testimonialRef.current) return;
         isClickRef.current = false;
+        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth - 20 : slideWidth.current * 4;
+        if (posRef.current === 0) {
+            setIsStart(true);
+        } else if (posRef.current === -totalWidth) {
+            setIsEnd(true);
+        } else {
+            setIsEnd(false);
+            setIsStart(false);
+        }
     };
     const touchMoveEvent = (e: TouchEvent) => {
         if (!testimonialRef.current) return;
         if (!isClickRef.current) return;
-        const totalWidth = slideWidth.current * 12 - innerWidth + 20;
+        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth - 20 : slideWidth.current * 4;
         posRef.current = e.targetTouches[0].pageX - firstPointRef.current;
         if (posRef.current < -totalWidth) posRef.current = -totalWidth;
         if (posRef.current > 0) posRef.current = 0;
@@ -235,9 +245,9 @@ export default function Testmonial() {
     };
 
     return (
-        <div className="container division-padding" style={{ userSelect: "none" }}>
-            <p className="head-1">수강생 후기</p>
-            <div className="desktop-body" style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className='container division-padding' style={{ userSelect: "none" }}>
+            <p className='head-1'>수강생 후기</p>
+            <div className='desktop-body' style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ display: "flex", alignItems: "center", marginBottom: isMobile ? "8px" : "" }}>
                     실제 수강생의 생생한 후기를 읽어보세요
                 </p>
@@ -258,26 +268,16 @@ export default function Testmonial() {
                 onTouchMove={touchMoveEvent}
                 style={{ cursor: "grab" }}
             >
-                {isMobile ? (
-                    <>
-                        {dummyData1.concat(dummyData2).map((data) => (
-                            <TestimonialCard key={data.id} data={data} />
-                        ))}
-                    </>
-                ) : (
-                    <>
-                        <div className={style.cardContainer}>
-                            {dummyData1.map((data) => (
-                                <TestimonialCard key={data.id} data={data} />
-                            ))}
-                        </div>
-                        <div className={style.cardContainer}>
-                            {dummyData2.map((data) => (
-                                <TestimonialCard key={data.id} data={data} />
-                            ))}
-                        </div>
-                    </>
-                )}
+                <div className={style.cardContainer}>
+                    {dummyData1.map((data) => (
+                        <TestimonialCard key={data.id} data={data} />
+                    ))}
+                </div>
+                <div className={style.cardContainer}>
+                    {dummyData2.map((data) => (
+                        <TestimonialCard key={data.id} data={data} />
+                    ))}
+                </div>
             </div>
         </div>
     );

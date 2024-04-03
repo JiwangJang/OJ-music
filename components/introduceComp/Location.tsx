@@ -31,7 +31,7 @@ export default function Location() {
         <div className='container division-padding' style={{ paddingTop: 0 }}>
             <p className='head-1'>학원위치</p>
             <p className={`desktop-body ${style.address}`}>주소 : 전라남도 여수시 시청로 1</p>
-            <div id='map' ref={mapRef}></div>
+            <div className={style.map} ref={mapRef}></div>
         </div>
     );
 }

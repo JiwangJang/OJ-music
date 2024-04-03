@@ -443,7 +443,13 @@
         height: 50px !important;
     }
 
-    .testimonialContainer {
+    .cardContainer {
+        height: auto;
+        margin-bottom: 0 !important;
+    }
+
+    .testimonialContainer,
+    .cardContainer {
         display: flex;
         gap: 8px;
     }

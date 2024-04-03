@@ -63,3 +63,9 @@
     padding-top: 8px;
     padding-bottom: 16px;
 }
+
+.map {
+    height: 70vw;
+    max-height: 670px;
+    width: 100%;
+}
