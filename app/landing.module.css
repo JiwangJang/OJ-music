@@ -152,7 +152,7 @@
 
 .testimonialContainer {
     max-width: 2400px;
-    transition: 0.1s all;
+    transition: 0.3s all;
 }
 
 .cardContainer:first-child {

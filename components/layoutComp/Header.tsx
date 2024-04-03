@@ -46,7 +46,7 @@ export default function Header() {
     const scrollEvent = useCallback(() => {
         if (!headerRef.current) return;
         const scrollY = window.scrollY;
-        if (scrollY <= 0) headerRef.current.style.transform = "translateY(0%)";
+        if (scrollY <= 0) return (headerRef.current.style.transform = "translateY(0%)");
         if (prevScrollRef.current < scrollY) {
             headerRef.current.style.transform = "translateY(-100%)";
         }
