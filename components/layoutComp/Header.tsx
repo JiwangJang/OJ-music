@@ -54,24 +54,17 @@ export default function Header() {
             headerRef.current.style.transform = "translateY(0%)";
         }
         prevScrollRef.current = scrollY;
-        switch (pathname) {
-            case "/":
-                const differents = document.querySelector("#differents");
-                const available = document.querySelector("#available");
-                if (!(differents instanceof HTMLDivElement) || !(available instanceof HTMLDivElement)) return;
-                if (scrollY >= differents.offsetTop * 0.8) differents.classList.add("active");
-                if (scrollY >= available.offsetTop * 0.8) available.classList.add("active");
-                break;
-
-            default:
-                break;
-        }
-    }, [pathname]);
+    }, []);
 
     if (typeof window !== "undefined") window.addEventListener("scroll", scrollEvent);
 
     useEffect(() => {
-        if (headerRef.current) headerRef.current.classList.add("active");
+        if (headerRef.current) {
+            headerRef.current.classList.add("active");
+            headerRef.current.addEventListener("transitionend", () => {
+                if (headerRef.current) headerRef.current.style.transitionDelay = "0.2s";
+            });
+        }
     }, []);
 
     const menuOpen = useCallback(() => {

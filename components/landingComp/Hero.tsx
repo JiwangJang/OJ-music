@@ -28,7 +28,7 @@ export default function Hero() {
                     <p>실력있는 강사들만 엄선한 최고의 음악학원!</p>
                 </div>
             </div>
-            <div className={styles.fadeOut}></div>
+            <div className='fadeOut'></div>
         </div>
     );
 }

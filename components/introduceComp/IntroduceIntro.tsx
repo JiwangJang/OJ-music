@@ -24,7 +24,7 @@ export default function IntroduceIntro() {
                     안녕하세요 <br /> 오제이 음악학원입니다
                 </p>
             </div>
-            <div className={style.fadeOut}></div>
+            <div className='fadeOut'></div>
         </div>
     );
 }

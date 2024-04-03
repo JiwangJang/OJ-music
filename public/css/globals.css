@@ -78,8 +78,8 @@ header {
     background: linear-gradient(to bottom, #181818, #18181800);
     display: flex;
     align-items: center;
-    transition: all 0.3s ease-in-out;
-    transition-delay: 0.5s;
+    transition: all 0.5s ease-in-out;
+    transition-delay: 0.8s;
 }
 
 header.active {
@@ -162,6 +162,14 @@ footer ul {
     margin-bottom: 36px;
 }
 
+.fadeOut {
+    height: 120px;
+    background: linear-gradient(to top, #181818, #18181800);
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+}
+
 @media (max-width: 1220px) {
     .container,
     footer {
@@ -171,6 +179,10 @@ footer ul {
 
     .head-1 {
         font-size: 10vw;
+    }
+
+    .head-2 {
+        font-size: 7vw;
     }
 
     .head-3 {
@@ -325,6 +337,7 @@ footer ul {
         padding-bottom: 60px;
     }
 }
+
 /* gsap 쓰기 까다로워서 직접만드는 스크롤 기반 애니메이션 */
 #differents,
 #available {
@@ -335,6 +348,17 @@ footer ul {
 
 #differents.active,
 #available.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.curriculum {
+    opacity: 0;
+    transform: translateY(20%);
+    transition: 0.7s all;
+}
+
+.curriculum.active {
     opacity: 1;
     transform: translateY(0);
 }

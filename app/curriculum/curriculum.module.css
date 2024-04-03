@@ -1,0 +1,143 @@
+.introImageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100lvh;
+    width: 100%;
+}
+
+.introImageContainer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+}
+
+.mentContainer {
+    padding-top: 60lvh;
+    opacity: 0;
+    transform: translateY(10%);
+    transition: 0.5s all;
+    transition-delay: 0.3s;
+}
+
+.stepContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.curriculumStep {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+}
+
+.curriculumTitle {
+    grid-row: 1;
+    grid-column: 1/13;
+}
+
+.curriculumImage {
+    grid-row: 2;
+    grid-column: 8/13;
+    max-height: 300px;
+    max-width: 486px;
+    width: 40vw;
+    height: 30vw;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.curriculumContent {
+    grid-column: 1/7;
+    white-space: pre;
+    font-size: 64px;
+    line-height: 1.2;
+}
+
+.priceTable {
+    width: 100%;
+    font-size: 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.priceTable th,
+.priceTable td {
+    padding: 20px 0px;
+    color: black !important;
+    text-align: center;
+    border: 1px solid #545454;
+    transition: 0.2s all;
+}
+
+.priceTable th:nth-of-type(1) {
+    width: 20%;
+}
+.priceTable th:nth-of-type(2) {
+    width: 40%;
+}
+.priceTable th:nth-of-type(3) {
+    width: 40%;
+}
+
+.priceTable thead {
+    background-color: #d6c2ff;
+    font-weight: bold;
+}
+
+.priceTable tbody {
+    background-color: white;
+    font-weight: normal;
+}
+
+@media (max-width: 1200px) {
+    .curriculumContent {
+        font-size: 5vw;
+    }
+
+    .stepContainer {
+        gap: 8vw;
+    }
+
+    .curriculumStep {
+        gap: 1.5vw;
+    }
+
+    .priceTable {
+        font-size: 3.1vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .priceTable th,
+    .priceTable td {
+        padding: 12px 0px;
+    }
+}
+
+@media (max-width: 500px) {
+    .curriculumStep {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .curriculumImage {
+        max-width: none;
+        width: 100%;
+        height: 30lvh;
+    }
+    .priceTable {
+        font-size: 16px;
+    }
+}

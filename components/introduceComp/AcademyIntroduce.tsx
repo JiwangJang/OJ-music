@@ -14,7 +14,13 @@ export default function AcademyIntroduce() {
                 </p>
             </div>
             <div className={style.outlookImage}>
-                <Image src={"/image/introduce/outlook.png"} fill sizes='100%' alt='학원전경'></Image>
+                <Image
+                    src={"/image/introduce/outlook.png"}
+                    fill
+                    sizes='100%'
+                    alt='학원전경'
+                    style={{ objectFit: "cover" }}
+                ></Image>
             </div>
         </div>
     );

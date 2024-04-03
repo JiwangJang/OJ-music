@@ -2,8 +2,10 @@
 
 import styles from "@/app/landing.module.css";
 import Image from "next/image";
+import { useCallback, useRef } from "react";
 
 export default function Differents() {
+    const containerRef = useRef<HTMLDivElement>(null);
     const differentsData = [
         {
             image: "/image/landing/differents/1.jpg",
@@ -21,11 +23,17 @@ export default function Differents() {
             key: 2451,
         },
     ];
+
+    const scrollEvent = useCallback(() => {
+        const differents = containerRef.current;
+        if (!differents) return;
+        if (scrollY >= differents.offsetTop * 0.7) differents.classList.add("active");
+    }, []);
+
+    if (typeof window !== "undefined") window.addEventListener("scroll", scrollEvent);
     return (
-        <div className='container division-padding' id='differents'>
-            <p className='head-1'>
-                저희는 다릅니다!
-            </p>
+        <div className='container division-padding' id='differents' ref={containerRef}>
+            <p className='head-1'>저희는 다릅니다!</p>
             <div className={styles.differentsContainer}>
                 {differentsData.map(({ image, content, key }) => (
                     <div key={key} style={{ flex: 1 }}>
