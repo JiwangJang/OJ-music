@@ -13,11 +13,11 @@ export default function Hero() {
     }, []);
 
     return (
-        <div className='full-vh'>
+        <div className='full-vh' style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <div className={styles.videoContainer}>
                 <video className={styles.video} src='/video/landing.mp4' autoPlay loop muted playsInline></video>
             </div>
-            <div className={`${styles.mentContainer} container full-vh `} ref={mentRef}>
+            <div className={`${styles.mentContainer} container`} style={{ height: "auto" }} ref={mentRef}>
                 <p className='head-1'>
                     나만의 멜로디 <br />
                     나만의 리듬

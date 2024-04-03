@@ -1,35 +1,3 @@
-.introImage {
-    background-image: url("/image/introduce/intro.jpg");
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-
-.introImage::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.3;
-}
-
-.introImage > img {
-    object-fit: cover;
-    object-position: right center;
-}
-
-.introMentContainer {
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(10%);
-    transition: all 0.5s;
-}
-
 .academyIntroduceContainer {
     display: grid;
     grid-template-columns: repeat(12, 1fr);

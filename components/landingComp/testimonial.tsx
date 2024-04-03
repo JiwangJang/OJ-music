@@ -20,7 +20,6 @@ export default function Testmonial() {
     useEffect(() => {
         const isMobile = window.innerWidth < 500;
         setIsMoblie(isMobile);
-        console.log(window.navigator.userAgent);
         const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
         if (testimonialCard) {
             if (isMobile) slideWidth.current = testimonialCard.offsetWidth + 8;

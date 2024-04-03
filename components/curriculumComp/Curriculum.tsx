@@ -35,9 +35,11 @@ export default function Curriculum() {
         )
             return;
 
-        if (scrollY > curriculum1.offsetTop * 0.7) curriculum1.classList.add("active");
-        if (scrollY > curriculum2.offsetTop * 0.7) curriculum2.classList.add("active");
-        if (scrollY > curriculum3.offsetTop * 0.7) curriculum3.classList.add("active");
+        const offsetParent = curriculum1.offsetParent;
+        if (!(offsetParent instanceof HTMLDivElement)) return;
+        if (scrollY > offsetParent.offsetTop * 0.7) curriculum1.classList.add("active");
+        if (scrollY > (offsetParent.offsetTop + curriculum2.offsetTop) * 0.7) curriculum2.classList.add("active");
+        if (scrollY > (offsetParent.offsetTop + curriculum3.offsetTop) * 0.7) curriculum3.classList.add("active");
     }, []);
 
     if (typeof window !== "undefined") window.addEventListener("scroll", scrollEvent);

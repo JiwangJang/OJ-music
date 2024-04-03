@@ -1,0 +1,29 @@
+.instrumentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slideBtn {
+    display: flex;
+}
+
+.leftBtn {
+    background-image: url(/svg/arrow_forward.svg);
+    transform: rotate(180deg);
+}
+.rightBtn {
+    background-image: url(/svg/arrow_forward.svg);
+}
+
+.leftBtn,
+.rightBtn {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 5vw;
+    height: 5vw;
+    min-width: 70px;
+    min-height: 70px;
+    cursor: pointer;
+}

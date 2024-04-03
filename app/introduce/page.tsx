@@ -1,11 +1,11 @@
 import AcademyIntroduce from "@/components/introduceComp/AcademyIntroduce";
-import IntroduceIntro from "@/components/introduceComp/IntroduceIntro";
 import Location from "@/components/introduceComp/Location";
+import Intro from "@/components/layoutComp/Intro";
 
 export default function Page() {
     return (
         <div>
-            <IntroduceIntro />
+            <Intro title={`안녕하세요\n오제이 음악학원입니다`} imgSrc='/image/introduce/intro.jpg' />
             <AcademyIntroduce />
             <Location />
         </div>
