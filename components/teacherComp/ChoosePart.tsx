@@ -6,13 +6,13 @@ import Teacher from "./ChoosePartComp/Teacher";
 import TeacherProfile from "./ChoosePartComp/TeacherProfile";
 
 export default function ChoosePart() {
-    const [instrument, setInstrument] = useState();
-    const [teacher, setTeacher] = useState();
+    const [instrument, setInstrument] = useState("");
+    const [teacher, setTeacher] = useState("");
 
     return (
         <>
-            <div className='container division-padding'>
-                <Instrument />
+            <div className="container division-padding">
+                <Instrument setInstrument={setInstrument} />
                 <Teacher />
             </div>
             <TeacherProfile />

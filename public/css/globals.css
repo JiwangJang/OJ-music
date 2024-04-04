@@ -394,3 +394,35 @@ footer ul {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* 과목세팅 */
+.instrument-selector {
+    position: relative;
+    max-width: 320px;
+    max-height: 320px;
+    width: 25vw;
+    height: 25vw;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    overflow: hidden;
+    user-select: none;
+}
+
+.instrument-selector::after {
+    content: attr(data-name);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.4s all;
+}
+
+.instrument-selector:hover::after {
+    opacity: 1;
+}

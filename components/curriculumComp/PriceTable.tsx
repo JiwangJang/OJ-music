@@ -35,8 +35,8 @@ export default function PriceTable() {
         },
         {
             id: 6513,
-            instrument: "시창청음",
-            major: "500,000",
+            instrument: "색소폰",
+            major: "400,000",
             hobby: "300,000",
         },
         {
@@ -48,8 +48,8 @@ export default function PriceTable() {
     ];
 
     return (
-        <div className='container division-padding'>
-            <p className='head-1'>강의료</p>
+        <div className="container division-padding">
+            <p className="head-1">강의료</p>
             <table className={style.priceTable}>
                 <thead>
                     <tr>
@@ -64,7 +64,7 @@ export default function PriceTable() {
                     ))}
                 </tbody>
             </table>
-            <p className='desktop-body'>본 가격은 일주일 1회 1시간 기준으로, 상담 후 가격 조정이 가능합니다</p>
+            <p className="desktop-body">본 가격은 일주일 1회 1시간 기준으로, 상담 후 가격 조정이 가능합니다</p>
         </div>
     );
 }

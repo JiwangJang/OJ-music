@@ -1,7 +1,7 @@
 .instrumentHeader {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .slideBtn {
@@ -23,7 +23,34 @@
     background-size: cover;
     width: 5vw;
     height: 5vw;
-    min-width: 70px;
-    min-height: 70px;
+    max-width: 70px;
+    max-height: 70px;
+    min-width: 36px;
+    min-height: 36px;
     cursor: pointer;
+}
+
+.instrumentBody {
+    background-color: #3c3c3c;
+    padding: 65px 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 12px;
+    cursor: grab;
+}
+
+.instrumentBody > div {
+    display: flex;
+    gap: 24px;
+}
+
+@media (max-width: 1200px) {
+    .instrumentBody {
+        padding: 5vw 2.5vw;
+        margin-top: 1vw;
+    }
+
+    .instrumentBody > div {
+        gap: 2vw;
+    }
 }
