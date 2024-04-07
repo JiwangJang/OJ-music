@@ -1,3 +1,9 @@
+"use client";
+
 export default function Loading() {
-    return <div>로딩중</div>;
+    return (
+        <div className='loading-container'>
+            <div className='loading-logo'></div>
+        </div>
+    );
 }

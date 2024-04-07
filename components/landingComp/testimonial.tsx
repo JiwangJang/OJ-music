@@ -33,6 +33,11 @@ export default function Testmonial() {
             if (testimonialCard) {
                 slideWidth.current = testimonialCard.offsetWidth + 12;
             }
+
+            if (testimonialRef.current) {
+                posRef.current = 0;
+                testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
+            }
         });
     }
 
@@ -223,7 +228,7 @@ export default function Testmonial() {
     const touchEndEvent = () => {
         if (!testimonialRef.current) return;
         isClickRef.current = false;
-        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth - 20 : slideWidth.current * 4;
+        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth + 32 : slideWidth.current * 4;
         if (posRef.current === 0) {
             setIsStart(true);
         } else if (posRef.current === -totalWidth) {
@@ -236,7 +241,7 @@ export default function Testmonial() {
     const touchMoveEvent = (e: TouchEvent) => {
         if (!testimonialRef.current) return;
         if (!isClickRef.current) return;
-        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth - 20 : slideWidth.current * 4;
+        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth + 32 : slideWidth.current * 4;
         posRef.current = e.targetTouches[0].pageX - firstPointRef.current;
         if (posRef.current < -totalWidth) posRef.current = -totalWidth;
         if (posRef.current > 0) posRef.current = 0;
@@ -247,9 +252,7 @@ export default function Testmonial() {
         <div className='container division-padding' style={{ userSelect: "none" }}>
             <p className='head-1'>수강생 후기</p>
             <div className='desktop-body' style={{ display: "flex", justifyContent: "space-between" }}>
-                <p style={{ display: "flex", alignItems: "center", marginBottom: isMobile ? "8px" : "" }}>
-                    실제 수강생의 생생한 후기를 읽어보세요
-                </p>
+                <p style={{ display: "flex", alignItems: "center" }}>실제 수강생의 생생한 후기를 읽어보세요</p>
                 <div className={style.utilBtns}>
                     {/* 한쪽 끝에 도달하면 opacity를 0.3으로 만듦 */}
                     <div className={style.leftBtn} onClick={prevSlide} style={{ opacity: isStart ? 0.3 : 1 }}></div>

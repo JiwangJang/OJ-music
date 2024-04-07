@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PathDatas {
     name: string;
@@ -78,6 +78,15 @@ export default function Header() {
         menuRef.current.classList.remove("active");
         document.body.style.overflowY = "auto";
     }, []);
+
+    const menuClick = useCallback(() => {
+        const container = document.querySelector("body > div");
+        if (container instanceof HTMLDivElement) {
+            container.style.overflowY = "hidden";
+            document.body.style.overflowY = "hidden";
+        }
+    }, []);
+
     return (
         <header ref={headerRef}>
             <div id='header-container' className='container'>
@@ -109,7 +118,7 @@ export default function Header() {
                             onClick={menuClose}
                         ></Image>
                         {pathData.map(({ name, content, key }) => (
-                            <li className={name === pathname ? "active" : ""} key={key}>
+                            <li onClick={menuClick} className={name === pathname ? "active" : ""} key={key}>
                                 <Link href={name} className='nav-link'>
                                     {content}
                                 </Link>

@@ -130,7 +130,7 @@
     }
 
     .instrumentBody > div,
-    .teacherContainer > div {
+    .teacherContainer {
         gap: 2vw;
     }
 
@@ -171,5 +171,9 @@
 
     .teacherIntroContainer {
         height: auto;
+    }
+
+    .teacherProfile {
+        border-width: 3px;
     }
 }

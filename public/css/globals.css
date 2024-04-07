@@ -455,3 +455,27 @@ footer ul {
 .instrument-selector:hover::after {
     opacity: 1;
 }
+
+/* 로딩컴포넌트 스타일링 */
+.loading-container {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #181818;
+}
+
+.loading-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url(/svg/logo.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 74px;
+    width: 205px;
+    opacity: 0.2;
+}

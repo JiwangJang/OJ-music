@@ -229,6 +229,7 @@
     cursor: pointer;
     transition: 0.2s all;
     background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .rightBtn.end,
@@ -485,8 +486,14 @@
         font-size: 14px;
     }
 
-    .rightBtn,
-    .leftBtn {
-        display: none;
+    .utilBtns {
+        height: 36px;
+    }
+
+    .leftBtn,
+    .rightBtn {
+        height: 36px;
+        width: 36px;
+        background-size: 36px;
     }
 }

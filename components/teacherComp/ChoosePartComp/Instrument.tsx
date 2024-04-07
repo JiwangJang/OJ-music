@@ -95,6 +95,7 @@ export default function Instrument({ instrument, setInstrument }: Props) {
     }, []);
 
     const TouchEndEvent = useCallback(() => {
+        if (!isClick.current) return;
         isClick.current = false;
         if (curPos.current === 0) {
             setIsStart(true);
@@ -108,7 +109,6 @@ export default function Instrument({ instrument, setInstrument }: Props) {
 
     const TouchMoveEvent = useCallback((e: TouchEvent) => {
         clearTimeout(setTimeoutRef.current);
-        if (!isClick.current) return;
         if (!slideContainer.current) return;
 
         curPos.current = e.targetTouches[0].pageX - firstClickPoint.current;
