@@ -171,7 +171,7 @@ footer ul {
 /* 인트로 부분 공통 CSS */
 .intro-ment-container {
     position: absolute;
-    bottom: 15svh;
+    top: 70vh;
     transition: all 0.5s;
     transition-delay: 0.3s;
     transform: translateY(20%);

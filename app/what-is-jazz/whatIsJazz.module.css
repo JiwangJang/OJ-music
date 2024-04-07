@@ -6,6 +6,7 @@
     position: relative;
     padding-top: 120px;
     padding-bottom: 120px;
+    height: 100svh;
 }
 
 .JazzExpainContainer::after {
@@ -40,6 +41,7 @@
 .article {
     grid-column: 1/8;
     font-size: 36px;
+    line-height: 1.4;
 }
 
 .image {
@@ -66,7 +68,7 @@
         flex-direction: column;
         margin-top: 16px;
         gap: 8px;
-        height: 70vw;
+        height: 90vw;
     }
 
     .image {
@@ -81,6 +83,9 @@
 
 @media (max-width: 500px) {
     .article {
-        font-size: 16px;
+        font-size: 18px;
+    }
+    .content {
+        height: 100vw;
     }
 }
