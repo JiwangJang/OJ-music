@@ -24,19 +24,15 @@ export default function Instrument({ instrument, setInstrument }: Props) {
     const firstClickPoint = useRef<number>(0);
     const totalWidth = useRef<number>(0);
     const curPos = useRef<number>(0);
+    const progressRatio = useRef<number>(0);
     const setTimeoutRef = useRef<NodeJS.Timeout>();
-    const [isMobile, setIsMoblie] = useState(false);
-
-    useEffect(() => {
-        const isMobile = /Mobi/i.test(window.navigator.userAgent);
-        setIsMoblie(isMobile);
-    }, []);
 
     const setTotalWidth = useCallback(() => {
         const seletor = document.querySelector(".instrument-selector");
         if (!(slideContainer.current instanceof HTMLDivElement)) return;
         if (!(slideContainer.current.offsetParent instanceof HTMLDivElement)) return;
         if (!(seletor instanceof HTMLDivElement)) return;
+
         if (innerWidth > 1200) {
             totalWidth.current =
                 (seletor.offsetWidth + 24) * 6 + seletor.offsetWidth - slideContainer.current.offsetWidth;
@@ -47,9 +43,8 @@ export default function Instrument({ instrument, setInstrument }: Props) {
                 slideContainer.current.offsetWidth;
         }
 
-        curPos.current = 0;
-
-        slideContainer.current.style.transform = `translateX(0px)`;
+        curPos.current = totalWidth.current * progressRatio.current;
+        slideContainer.current.style.transform = `translateX(${curPos.current}px)`;
     }, []);
 
     // 악기선택의 총 넓이 구하는 과정
@@ -57,7 +52,7 @@ export default function Instrument({ instrument, setInstrument }: Props) {
     // 브라우저 리사이즈 대응
     if (typeof window !== "undefined")
         window.addEventListener("resize", () => {
-            if (isMobile) return;
+            // 모바일 화면의 경우 첫위치로 돌리지 않기위한 방법
             setTotalWidth();
         });
 
@@ -90,6 +85,7 @@ export default function Instrument({ instrument, setInstrument }: Props) {
         if (Math.abs(curPos.current) >= totalWidth.current) curPos.current = -totalWidth.current;
         if (curPos.current > 0) curPos.current = 0;
 
+        progressRatio.current = curPos.current / totalWidth.current;
         slideContainer.current.style.transform = `translateX(${curPos.current}px)`;
 
         setTimeoutRef.current = setTimeout(() => {
@@ -125,6 +121,7 @@ export default function Instrument({ instrument, setInstrument }: Props) {
         if (Math.abs(curPos.current) >= totalWidth.current) curPos.current = -totalWidth.current;
         if (curPos.current > 0) curPos.current = 0;
 
+        progressRatio.current = curPos.current / totalWidth.current;
         slideContainer.current.style.transform = `translateX(${curPos.current}px)`;
 
         setTimeoutRef.current = setTimeout(() => (isClick.current = false), 300);
@@ -174,9 +171,9 @@ export default function Instrument({ instrument, setInstrument }: Props) {
     }, []);
 
     return (
-        <div className='division-padding'>
+        <div className="division-padding">
             <div className={style.instrumentHeader}>
-                <p className='head-2'>과목선택</p>
+                <p className="head-2">과목선택</p>
                 <div className={style.slideBtn}>
                     <div
                         className={style.leftBtn}
@@ -233,7 +230,7 @@ function InstrumentSelector({ name, imageSrc, isSelect, setFunc }: InstrumentSel
             data-name={kr[name]}
             onClick={() => setFunc(name)}
         >
-            <Image src={imageSrc} fill sizes='100%' style={{ objectFit: "cover" }} alt='악기사진'></Image>
+            <Image src={imageSrc} fill sizes="100%" style={{ objectFit: "cover" }} alt="악기사진"></Image>
         </div>
     );
 }

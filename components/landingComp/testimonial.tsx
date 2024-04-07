@@ -11,36 +11,49 @@ export default function Testmonial() {
     const testimonialRef = useRef<HTMLDivElement>(null);
     const posRef = useRef<number>(0);
     const firstPointRef = useRef<number>(0);
+    const progressRatio = useRef<number>(0);
     const isClickRef = useRef<boolean>(false);
     const setTimeoutRef = useRef<NodeJS.Timeout>();
-    const slideWidth = useRef<number>(0);
-    // slideWidth * 4 = 전체 슬라이더 넓이(Desktop)
+    const totalWidth = useRef<number>(0);
+    // slideWidth * 6 = 전체 슬라이더 넓이(Desktop)
     // slideWidth * 12 = 전체 슬라이더 넓이(Moblie)
 
     useEffect(() => {
-        console.log("이펙트");
         const isMobile = window.innerWidth < 500;
         setIsMoblie(isMobile);
         const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
+        if (!testimonialRef.current) return;
         if (testimonialCard) {
-            if (isMobile) slideWidth.current = testimonialCard.offsetWidth + 8;
-            else slideWidth.current = testimonialCard.offsetWidth + 12;
+            if (innerWidth < 500)
+                totalWidth.current =
+                    (testimonialCard.offsetWidth + 8) * 11 +
+                    testimonialCard.offsetWidth -
+                    testimonialRef.current.offsetWidth;
+            else
+                totalWidth.current =
+                    (testimonialCard.offsetWidth + 12) * 5 +
+                    testimonialCard.offsetWidth -
+                    testimonialRef.current.offsetWidth;
         }
     }, []);
 
     if (typeof window !== "undefined") {
-        console.log("typeof");
         window.addEventListener("resize", () => {
-            if (isMobile) return;
             const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
-            if (testimonialCard) {
-                slideWidth.current = testimonialCard.offsetWidth + 12;
-            }
-
-            if (testimonialRef.current) {
-                posRef.current = 0;
-                testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
-            }
+            if (!testimonialCard) return;
+            if (!testimonialRef.current) return;
+            if (innerWidth < 500)
+                totalWidth.current =
+                    (testimonialCard.offsetWidth + 8) * 11 +
+                    testimonialCard.offsetWidth -
+                    testimonialRef.current.offsetWidth;
+            else
+                totalWidth.current =
+                    (testimonialCard.offsetWidth + 12) * 5 +
+                    testimonialCard.offsetWidth -
+                    testimonialRef.current.offsetWidth;
+            posRef.current = progressRatio.current * totalWidth.current;
+            testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
         });
     }
 
@@ -150,7 +163,7 @@ export default function Testmonial() {
         isClickRef.current = false;
         if (posRef.current === 0) {
             setIsStart(true);
-        } else if (posRef.current === -(slideWidth.current * 4)) {
+        } else if (posRef.current === -totalWidth.current) {
             setIsEnd(true);
         } else {
             setIsEnd(false);
@@ -161,22 +174,20 @@ export default function Testmonial() {
         if (!testimonialRef.current) return;
         if (!isClickRef.current) return;
         clearTimeout(setTimeoutRef.current);
-        const totalWidth = slideWidth.current * 4;
         posRef.current = e.pageX - firstPointRef.current;
-        if (posRef.current < -totalWidth) posRef.current = -totalWidth;
+        if (posRef.current < -totalWidth.current) posRef.current = -totalWidth.current;
         if (posRef.current > 0) posRef.current = 0;
-
         setTimeoutRef.current = setTimeout(() => {
             isClickRef.current = false;
             if (!testimonialRef.current) return;
             testimonialRef.current.style.cursor = "grab";
         }, 300);
 
+        progressRatio.current = posRef.current / totalWidth.current;
         testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
     };
     const nextSlide = () => {
-        const totalWidth = slideWidth.current * 4;
-        if (posRef.current === -totalWidth) return;
+        if (posRef.current === -totalWidth.current) return;
         const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
         if (!testimonialRef.current) return;
         if (!testimonialCard) return;
@@ -189,13 +200,14 @@ export default function Testmonial() {
             posRef.current -= remain;
         }
 
-        if (posRef.current <= -totalWidth) {
+        if (posRef.current <= -totalWidth.current) {
             setIsEnd(true);
-            posRef.current = -totalWidth;
+            posRef.current = -totalWidth.current;
         } else {
             setIsEnd(false);
             if (isStart) setIsStart(false);
         }
+        progressRatio.current = posRef.current / totalWidth.current;
         testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
     };
     const prevSlide = () => {
@@ -219,6 +231,7 @@ export default function Testmonial() {
             setIsStart(false);
             if (isEnd) setIsEnd(false);
         }
+        progressRatio.current = posRef.current / totalWidth.current;
         testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
     };
 
@@ -231,10 +244,9 @@ export default function Testmonial() {
     const touchEndEvent = () => {
         if (!testimonialRef.current) return;
         isClickRef.current = false;
-        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth + 32 : slideWidth.current * 4;
         if (posRef.current === 0) {
             setIsStart(true);
-        } else if (posRef.current === -totalWidth) {
+        } else if (posRef.current === -totalWidth.current) {
             setIsEnd(true);
         } else {
             setIsEnd(false);
@@ -244,17 +256,18 @@ export default function Testmonial() {
     const touchMoveEvent = (e: TouchEvent) => {
         if (!testimonialRef.current) return;
         if (!isClickRef.current) return;
-        const totalWidth = isMobile ? slideWidth.current * 12 - innerWidth + 32 : slideWidth.current * 4;
         posRef.current = e.targetTouches[0].pageX - firstPointRef.current;
-        if (posRef.current < -totalWidth) posRef.current = -totalWidth;
+        console.log(totalWidth.current);
+        if (posRef.current < -totalWidth.current) posRef.current = -totalWidth.current;
         if (posRef.current > 0) posRef.current = 0;
+        progressRatio.current = posRef.current / totalWidth.current;
         testimonialRef.current.style.transform = `translateX(${posRef.current}px)`;
     };
 
     return (
-        <div className='container division-padding' style={{ userSelect: "none" }}>
-            <p className='head-1'>수강생 후기</p>
-            <div className='desktop-body' style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className="container division-padding" style={{ userSelect: "none" }}>
+            <p className="head-1">수강생 후기</p>
+            <div className="desktop-body" style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ display: "flex", alignItems: "center" }}>실제 수강생의 생생한 후기를 읽어보세요</p>
                 <div className={style.utilBtns}>
                     {/* 한쪽 끝에 도달하면 opacity를 0.3으로 만듦 */}
