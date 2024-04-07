@@ -71,7 +71,7 @@ body {
 }
 
 .full-vh {
-    height: 100lvh;
+    height: 100vh;
 }
 
 header {
@@ -262,7 +262,7 @@ footer ul {
         top: 0;
         right: 0;
         width: 100vw;
-        height: 100lvh;
+        height: 100vh;
         background-color: rgba(0, 0, 0, 0.5);
         transition: all 0.2s;
     }

@@ -79,14 +79,6 @@ export default function Header() {
         document.body.style.overflowY = "auto";
     }, []);
 
-    const menuClick = useCallback(() => {
-        const container = document.querySelector("body > div");
-        if (container instanceof HTMLDivElement) {
-            container.style.overflowY = "hidden";
-            document.body.style.overflowY = "hidden";
-        }
-    }, []);
-
     return (
         <header ref={headerRef}>
             <div id='header-container' className='container'>
@@ -118,7 +110,7 @@ export default function Header() {
                             onClick={menuClose}
                         ></Image>
                         {pathData.map(({ name, content, key }) => (
-                            <li onClick={menuClick} className={name === pathname ? "active" : ""} key={key}>
+                            <li className={name === pathname ? "active" : ""} key={key}>
                                 <Link href={name} className='nav-link'>
                                     {content}
                                 </Link>

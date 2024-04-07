@@ -25,6 +25,12 @@ export default function Instrument({ instrument, setInstrument }: Props) {
     const totalWidth = useRef<number>(0);
     const curPos = useRef<number>(0);
     const setTimeoutRef = useRef<NodeJS.Timeout>();
+    const [isMobile, setIsMoblie] = useState(false);
+
+    useEffect(() => {
+        const isMobile = /Mobi/i.test(window.navigator.userAgent);
+        setIsMoblie(isMobile);
+    }, []);
 
     const setTotalWidth = useCallback(() => {
         const seletor = document.querySelector(".instrument-selector");
@@ -49,7 +55,11 @@ export default function Instrument({ instrument, setInstrument }: Props) {
     // 악기선택의 총 넓이 구하는 과정
     useEffect(() => setTotalWidth(), [setTotalWidth]);
     // 브라우저 리사이즈 대응
-    if (typeof window !== "undefined") window.addEventListener("resize", () => setTotalWidth());
+    if (typeof window !== "undefined")
+        window.addEventListener("resize", () => {
+            if (isMobile) return;
+            setTotalWidth();
+        });
 
     const MouseDownEvent = useCallback((e: MouseEvent) => {
         isClick.current = true;

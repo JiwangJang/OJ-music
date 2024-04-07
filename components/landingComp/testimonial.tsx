@@ -18,6 +18,7 @@ export default function Testmonial() {
     // slideWidth * 12 = 전체 슬라이더 넓이(Moblie)
 
     useEffect(() => {
+        console.log("이펙트");
         const isMobile = window.innerWidth < 500;
         setIsMoblie(isMobile);
         const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
@@ -28,7 +29,9 @@ export default function Testmonial() {
     }, []);
 
     if (typeof window !== "undefined") {
+        console.log("typeof");
         window.addEventListener("resize", () => {
+            if (isMobile) return;
             const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
             if (testimonialCard) {
                 slideWidth.current = testimonialCard.offsetWidth + 12;
