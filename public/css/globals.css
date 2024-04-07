@@ -63,6 +63,13 @@ body {
     padding-bottom: 120px;
 }
 
+.top-division-padding {
+    padding-top: 120px;
+}
+.bottom-division-padding {
+    padding-bottom: 120px;
+}
+
 .full-vh {
     height: 100lvh;
 }
@@ -164,7 +171,7 @@ footer ul {
 /* 인트로 부분 공통 CSS */
 .intro-ment-container {
     position: absolute;
-    bottom: 15lvh;
+    bottom: 15svh;
     transition: all 0.5s;
     transition-delay: 0.3s;
     transform: translateY(20%);
@@ -202,7 +209,7 @@ footer ul {
     width: 100%;
 }
 
-@media (max-width: 1220px) {
+@media (max-width: 1200px) {
     .container,
     footer {
         padding-left: 20px;
@@ -231,6 +238,13 @@ footer ul {
 
     .division-padding {
         padding-top: 8vh;
+        padding-bottom: 8vh;
+    }
+
+    .top-division-padding {
+        padding-top: 8vh;
+    }
+    .bottom-division-padding {
         padding-bottom: 8vh;
     }
 }
@@ -352,6 +366,10 @@ footer ul {
         font-size: 40px;
     }
 
+    .head-2 {
+        font-size: 32px;
+    }
+
     .head-4 {
         font-size: 18px;
     }
@@ -366,6 +384,13 @@ footer ul {
 
     .division-padding {
         padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .top-division-padding {
+        padding-top: 60px;
+    }
+    .bottom-division-padding {
         padding-bottom: 60px;
     }
 }
@@ -406,6 +431,10 @@ footer ul {
     border-radius: 9999px;
     overflow: hidden;
     user-select: none;
+}
+
+.instrument-selector.selected::after {
+    opacity: 1;
 }
 
 .instrument-selector::after {

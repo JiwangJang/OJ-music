@@ -9,13 +9,17 @@ export default function ChoosePart() {
     const [instrument, setInstrument] = useState("");
     const [teacher, setTeacher] = useState("");
 
+    const resetAndSetInstrument: (instrument: string) => void = (instrument) => {
+        if (teacher) setTeacher("");
+        setInstrument(instrument);
+    };
     return (
         <>
-            <div className="container division-padding">
-                <Instrument setInstrument={setInstrument} />
-                <Teacher />
+            <div className='container'>
+                <Instrument instrument={instrument} setInstrument={resetAndSetInstrument} />
+                {instrument && <Teacher instrument={instrument} teacher={teacher} setTeacher={setTeacher} />}
             </div>
-            <TeacherProfile />
+            {teacher && <TeacherProfile instrument={instrument} teacher={teacher} />}
         </>
     );
 }

@@ -1,56 +1,23 @@
 import style from "@/app/teacher/teacher.module.css";
+import instrumentData from "@/data/instrumentData";
 import Image from "next/image";
-import { Dispatch, MouseEvent, SetStateAction, useCallback, useEffect, useRef } from "react";
+import { Dispatch, MouseEvent, SetStateAction, TouchEvent, useCallback, useEffect, useRef, useState } from "react";
 
 interface Props {
-    setInstrument: Dispatch<SetStateAction<string>>;
+    instrument: string;
+    setInstrument: (instrument: string) => void;
 }
 
 interface InstrumentSelectorProps {
     name: string;
     imageSrc: string;
-    setFunc: Dispatch<SetStateAction<string>>;
+    isSelect: boolean;
+    setFunc: (instrument: string) => void;
 }
 
-export default function Instrument({ setInstrument }: Props) {
-    const instrumentData = [
-        {
-            id: 1254,
-            name: "piano",
-            imageSrc: "/image/teacher/piano.jpg",
-        },
-        {
-            id: 5324,
-            name: "elec",
-            imageSrc: "/image/teacher/elec-guitar.jpg",
-        },
-        {
-            id: 7585,
-            name: "base",
-            imageSrc: "/image/teacher/base.jpg",
-        },
-        {
-            id: 6724,
-            name: "drum",
-            imageSrc: "/image/teacher/drum.jpg",
-        },
-        {
-            id: 4273,
-            name: "saxophone",
-            imageSrc: "/image/teacher/saxophone.jpg",
-        },
-        {
-            id: 4874,
-            name: "midi",
-            imageSrc: "/image/teacher/midi.jpg",
-        },
-        {
-            id: 6248,
-            name: "vocal",
-            imageSrc: "/image/teacher/vocal.jpg",
-        },
-    ];
-
+export default function Instrument({ instrument, setInstrument }: Props) {
+    const [isStart, setIsStart] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
     const slideContainer = useRef<HTMLDivElement>(null);
     const instrumentContainer = useRef<HTMLDivElement>(null);
     const isClick = useRef<boolean>(false);
@@ -64,16 +31,17 @@ export default function Instrument({ setInstrument }: Props) {
         if (!(slideContainer.current instanceof HTMLDivElement)) return;
         if (!(slideContainer.current.offsetParent instanceof HTMLDivElement)) return;
         if (!(seletor instanceof HTMLDivElement)) return;
-        const container = slideContainer.current.offsetParent;
         if (innerWidth > 1200) {
-            totalWidth.current = (seletor.offsetWidth + 24) * 6 + seletor.offsetWidth - container.offsetWidth + 36 * 2;
+            totalWidth.current =
+                (seletor.offsetWidth + 24) * 6 + seletor.offsetWidth - slideContainer.current.offsetWidth;
         } else {
             totalWidth.current =
                 (seletor.offsetWidth + innerWidth * 0.02) * 6 +
                 seletor.offsetWidth -
-                container.offsetWidth +
-                outerWidth * 0.025 * 2;
+                slideContainer.current.offsetWidth;
         }
+
+        curPos.current = 0;
 
         slideContainer.current.style.transform = `translateX(0px)`;
     }, []);
@@ -92,6 +60,15 @@ export default function Instrument({ setInstrument }: Props) {
     const MouseUpEvent = useCallback(() => {
         isClick.current = false;
         if (instrumentContainer.current) instrumentContainer.current.style.cursor = "grab";
+
+        if (curPos.current >= 0) {
+            setIsStart(true);
+        } else if (Math.abs(curPos.current) >= totalWidth.current) {
+            setIsEnd(true);
+        } else {
+            setIsStart(false);
+            setIsEnd(false);
+        }
     }, []);
 
     const MouseMoveEvent = useCallback((e: MouseEvent) => {
@@ -102,6 +79,7 @@ export default function Instrument({ setInstrument }: Props) {
         curPos.current = e.pageX - firstClickPoint.current;
         if (Math.abs(curPos.current) >= totalWidth.current) curPos.current = -totalWidth.current;
         if (curPos.current > 0) curPos.current = 0;
+
         slideContainer.current.style.transform = `translateX(${curPos.current}px)`;
 
         setTimeoutRef.current = setTimeout(() => {
@@ -110,15 +88,96 @@ export default function Instrument({ setInstrument }: Props) {
         }, 300);
     }, []);
 
-    const leftSlide = useCallback(() => {}, []);
+    const TouchStartEvent = useCallback((e: TouchEvent) => {
+        if (isClick.current) return;
+        isClick.current = true;
+        firstClickPoint.current = e.targetTouches[0].pageX - curPos.current;
+    }, []);
+
+    const TouchEndEvent = useCallback(() => {
+        isClick.current = false;
+        if (curPos.current === 0) {
+            setIsStart(true);
+        } else if (curPos.current === -totalWidth.current) {
+            setIsEnd(true);
+        } else {
+            setIsEnd(false);
+            setIsStart(false);
+        }
+    }, []);
+
+    const TouchMoveEvent = useCallback((e: TouchEvent) => {
+        clearTimeout(setTimeoutRef.current);
+        if (!isClick.current) return;
+        if (!slideContainer.current) return;
+
+        curPos.current = e.targetTouches[0].pageX - firstClickPoint.current;
+        if (Math.abs(curPos.current) >= totalWidth.current) curPos.current = -totalWidth.current;
+        if (curPos.current > 0) curPos.current = 0;
+
+        slideContainer.current.style.transform = `translateX(${curPos.current}px)`;
+
+        setTimeoutRef.current = setTimeout(() => (isClick.current = false), 300);
+    }, []);
+
+    const leftSlide = useCallback(() => {
+        const seletor = document.querySelector(".instrument-selector");
+        if (!(seletor instanceof HTMLDivElement)) return;
+        if (!(slideContainer.current instanceof HTMLDivElement)) return;
+
+        if (innerWidth > 1200) {
+            curPos.current += seletor.offsetWidth + 24;
+        } else {
+            curPos.current += seletor.offsetWidth + outerWidth * 0.025;
+        }
+
+        if (curPos.current >= 0) {
+            curPos.current = 0;
+            setIsStart(true);
+        } else {
+            setIsEnd(false);
+            setIsStart(false);
+        }
+        slideContainer.current.style.transform = `translateX(${curPos.current}px)`;
+    }, []);
+
+    const rightSlide = useCallback(() => {
+        const seletor = document.querySelector(".instrument-selector");
+        if (!(seletor instanceof HTMLDivElement)) return;
+        if (!(slideContainer.current instanceof HTMLDivElement)) return;
+
+        if (innerWidth > 1200) {
+            curPos.current -= seletor.offsetWidth + 24;
+        } else {
+            curPos.current -= seletor.offsetWidth + outerWidth * 0.025;
+        }
+
+        if (curPos.current <= -totalWidth.current) {
+            curPos.current = -totalWidth.current;
+            setIsEnd(true);
+        } else {
+            setIsEnd(false);
+            setIsStart(false);
+        }
+
+        slideContainer.current.style.transform = `translateX(${curPos.current}px)`;
+    }, []);
 
     return (
-        <div>
+        <div className='division-padding'>
             <div className={style.instrumentHeader}>
-                <p className="head-2">과목선택</p>
+                <p className='head-2'>과목선택</p>
                 <div className={style.slideBtn}>
-                    <div className={style.leftBtn}></div>
-                    <div className={style.rightBtn}></div>
+                    <div
+                        className={style.leftBtn}
+                        onClick={leftSlide}
+                        style={{ opacity: isStart ? "0.3" : "1", transition: "all 0.2s" }}
+                    ></div>
+                    <div
+                        className={style.rightBtn}
+                        onClick={rightSlide}
+                        style={{ opacity: isEnd ? "0.3" : "1", transition: "all 0.2s" }}
+                    ></div>
                 </div>
             </div>
             <div
@@ -126,11 +185,20 @@ export default function Instrument({ setInstrument }: Props) {
                 onMouseDown={MouseDownEvent}
                 onMouseUp={MouseUpEvent}
                 onMouseMove={MouseMoveEvent}
+                onTouchStart={TouchStartEvent}
+                onTouchEnd={TouchEndEvent}
+                onTouchMove={TouchMoveEvent}
                 ref={instrumentContainer}
             >
-                <div ref={slideContainer}>
+                <div ref={slideContainer} style={{ transition: "0.3s all" }}>
                     {instrumentData.map(({ id, name, imageSrc }) => (
-                        <InstrumentSelector key={id} name={name} imageSrc={imageSrc} setFunc={setInstrument} />
+                        <InstrumentSelector
+                            key={id}
+                            name={name}
+                            imageSrc={imageSrc}
+                            setFunc={setInstrument}
+                            isSelect={instrument === name}
+                        />
                     ))}
                 </div>
             </div>
@@ -138,7 +206,7 @@ export default function Instrument({ setInstrument }: Props) {
     );
 }
 
-function InstrumentSelector({ name, imageSrc, setFunc }: InstrumentSelectorProps) {
+function InstrumentSelector({ name, imageSrc, isSelect, setFunc }: InstrumentSelectorProps) {
     const kr: { [key: string]: string } = {
         piano: "피아노",
         elec: "기타",
@@ -150,8 +218,12 @@ function InstrumentSelector({ name, imageSrc, setFunc }: InstrumentSelectorProps
     };
 
     return (
-        <div className="instrument-selector head-3" data-name={kr[name]} onClick={() => setFunc(name)}>
-            <Image src={imageSrc} fill sizes="100%" style={{ objectFit: "cover" }} alt="악기사진"></Image>
+        <div
+            className={`instrument-selector head-3 ${isSelect && "selected"}`}
+            data-name={kr[name]}
+            onClick={() => setFunc(name)}
+        >
+            <Image src={imageSrc} fill sizes='100%' style={{ objectFit: "cover" }} alt='악기사진'></Image>
         </div>
     );
 }
