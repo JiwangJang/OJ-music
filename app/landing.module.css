@@ -362,7 +362,7 @@
 
 @media (max-width: 500px) {
     .mentContainer > p {
-        padding-top: 60svh;
+        padding-top: 50svh;
         margin-bottom: 4px;
     }
     .differentsContainer {
