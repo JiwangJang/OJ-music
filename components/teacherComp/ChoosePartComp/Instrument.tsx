@@ -1,7 +1,7 @@
 import style from "@/app/teacher/teacher.module.css";
 import instrumentData from "@/data/instrumentData";
-import Image from "next/image";
-import { Dispatch, MouseEvent, SetStateAction, TouchEvent, useCallback, useEffect, useRef, useState } from "react";
+import Image, { StaticImageData } from "next/image";
+import { MouseEvent, TouchEvent, useCallback, useEffect, useRef, useState } from "react";
 
 interface Props {
     instrument: string;
@@ -10,7 +10,7 @@ interface Props {
 
 interface InstrumentSelectorProps {
     name: string;
-    imageSrc: string;
+    image: StaticImageData;
     isSelect: boolean;
     setFunc: (instrument: string) => void;
 }
@@ -198,11 +198,11 @@ export default function Instrument({ instrument, setInstrument }: Props) {
                 ref={instrumentContainer}
             >
                 <div ref={slideContainer} style={{ transition: "0.3s all" }}>
-                    {instrumentData.map(({ id, name, imageSrc }) => (
+                    {instrumentData.map(({ id, name, image }) => (
                         <InstrumentSelector
                             key={id}
                             name={name}
-                            imageSrc={imageSrc}
+                            image={image}
                             setFunc={setInstrument}
                             isSelect={instrument === name}
                         />
@@ -213,7 +213,7 @@ export default function Instrument({ instrument, setInstrument }: Props) {
     );
 }
 
-function InstrumentSelector({ name, imageSrc, isSelect, setFunc }: InstrumentSelectorProps) {
+function InstrumentSelector({ name, image, isSelect, setFunc }: InstrumentSelectorProps) {
     const kr: { [key: string]: string } = {
         piano: "피아노",
         elec: "기타",
@@ -230,7 +230,14 @@ function InstrumentSelector({ name, imageSrc, isSelect, setFunc }: InstrumentSel
             data-name={kr[name]}
             onClick={() => setFunc(name)}
         >
-            <Image src={imageSrc} fill sizes="100%" style={{ objectFit: "cover" }} alt="악기사진"></Image>
+            <Image
+                src={image}
+                fill
+                sizes="100%"
+                style={{ objectFit: "cover" }}
+                alt="악기사진"
+                placeholder="blur"
+            ></Image>
         </div>
     );
 }

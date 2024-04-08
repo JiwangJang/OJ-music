@@ -78,8 +78,6 @@
 .teacherIntroContainer {
     padding-top: 60px;
     padding-bottom: 60px;
-    background-size: cover;
-    background-position: center center;
     height: 504px;
     position: relative;
 }
@@ -92,7 +90,15 @@
     top: 0;
     left: 0;
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.4;
+}
+
+.teacherBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .teacherIntro {

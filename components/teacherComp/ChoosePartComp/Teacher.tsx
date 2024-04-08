@@ -11,8 +11,8 @@ interface Props {
 
 export default function Teacher({ instrument, teacher, setTeacher }: Props) {
     return (
-        <div className='bottom-division-padding'>
-            <p className='head-2'>강사선택</p>
+        <div className="bottom-division-padding">
+            <p className="head-2">강사선택</p>
             <div className={style.teacherContainer}>
                 {teacherInfoList[instrument].map(({ name, profile, key }) => (
                     <div
@@ -23,7 +23,15 @@ export default function Teacher({ instrument, teacher, setTeacher }: Props) {
                         className={style.teacherProfile}
                         onClick={() => setTeacher(name)}
                     >
-                        <Image src={profile} fill sizes='100%' alt='강사사진' style={{ objectFit: "cover" }}></Image>
+                        <Image
+                            src={profile}
+                            fill
+                            priority
+                            sizes="100%"
+                            alt="강사사진"
+                            style={{ objectFit: "cover" }}
+                            placeholder="blur"
+                        ></Image>
                     </div>
                 ))}
             </div>

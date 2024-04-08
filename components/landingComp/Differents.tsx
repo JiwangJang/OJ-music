@@ -3,6 +3,7 @@
 import styles from "@/app/landing.module.css";
 import Image from "next/image";
 import { useCallback, useRef } from "react";
+import Light from "./Light";
 
 export default function Differents() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -32,8 +33,8 @@ export default function Differents() {
 
     if (typeof window !== "undefined") window.addEventListener("scroll", scrollEvent);
     return (
-        <div className='container division-padding' id='differents' ref={containerRef}>
-            <p className='head-1'>저희는 다릅니다!</p>
+        <div className="container division-padding" id="differents" ref={containerRef}>
+            <p className="head-1">저희는 다릅니다!</p>
             <div className={styles.differentsContainer}>
                 {differentsData.map(({ image, content, key }) => (
                     <div key={key} style={{ flex: 1 }}>
@@ -44,12 +45,13 @@ export default function Differents() {
                             alt={`차이점 1 : ${content}`}
                             className={styles.image}
                         ></Image>
-                        <p className='head-3' style={{ whiteSpace: "pre-wrap" }}>
+                        <p className="head-3" style={{ whiteSpace: "pre-wrap" }}>
                             {content}
                         </p>
                     </div>
                 ))}
             </div>
+            <Light bgColor="#C72096" isleft={true} />
         </div>
     );
 }

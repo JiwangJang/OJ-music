@@ -1,6 +1,23 @@
+import { StaticImageData } from "next/image";
+
+import profile1 from '@/public/image/teacher/human/1.jpg'
+import profile2 from '@/public/image/teacher/human/2.jpg'
+import profile3 from '@/public/image/teacher/human/3.jpg'
+import profile4 from '@/public/image/teacher/human/4.jpg'
+import profile5 from '@/public/image/teacher/human/5.jpg'
+import profile6 from '@/public/image/teacher/human/6.jpg'
+import profile7 from '@/public/image/teacher/human/7.jpg'
+import profile8 from '@/public/image/teacher/human/8.jpg'
+import profile9 from '@/public/image/teacher/human/9.jpg'
+import profile10 from '@/public/image/teacher/human/10.jpg'
+import profile11 from '@/public/image/teacher/human/11.jpg'
+import profile12 from '@/public/image/teacher/human/12.jpg'
+import profile13 from '@/public/image/teacher/human/13.jpg'
+import profile14 from '@/public/image/teacher/human/14.jpg'
+
 interface TeacherInfo {
     name: string;
-    profile: string;
+    profile: StaticImageData;
     career: string[];
     key: number;
 }
@@ -13,7 +30,7 @@ const teacherInfoList: TeacherInfoList = {
     piano: [
         {
             name: "신동우",
-            profile: "/image/teacher/human/1.jpg",
+            profile:profile1,
             career: [
                 "서울예술대학교 실용음악과(피아노) 졸업",
                 "밴쿠버 동계올림픽 음악감독",
@@ -24,7 +41,7 @@ const teacherInfoList: TeacherInfoList = {
         },
         {
             name: "고정재",
-            profile: "/image/teacher/human/2.jpg",
+            profile: profile2,
             career: [
                 "한양대ERICA 실용음악과(피아노) 졸업",
                 "JYP.Ent 음악감독",
@@ -37,7 +54,7 @@ const teacherInfoList: TeacherInfoList = {
     elec: [
         {
             name: "예경원",
-            profile: "/image/teacher/human/3.jpg",
+            profile: profile3,
             career: [
                 "서울예술대학교 실용음악과(일렉기타) 졸업",
                 "밴쿠버 동계올림픽 음악감독",
@@ -48,7 +65,7 @@ const teacherInfoList: TeacherInfoList = {
         },
         {
             name: "설성근",
-            profile: "/image/teacher/human/4.jpg",
+            profile: profile4,
             career: [
                 "한양대ERICA 재즈피아노과(일렉기타) 졸업",
                 "JYP.Ent 음악감독",
@@ -61,7 +78,7 @@ const teacherInfoList: TeacherInfoList = {
     base: [
         {
             name: "허기용",
-            profile: "/image/teacher/human/5.jpg",
+            profile: profile5,
             career: [
                 "서울예술대학교 실용음악과(일렉기타) 졸업",
                 "밴쿠버 동계올림픽 음악감독",
@@ -72,7 +89,7 @@ const teacherInfoList: TeacherInfoList = {
         },
         {
             name: "장희경",
-            profile: "/image/teacher/human/6.jpg",
+            profile: profile6,
             career: [
                 "한양대ERICA 재즈피아노과(일렉기타) 졸업",
                 "JYP.Ent 음악감독",
@@ -85,7 +102,7 @@ const teacherInfoList: TeacherInfoList = {
     drum: [
         {
             name: "심재민",
-            profile: "/image/teacher/human/7.jpg",
+            profile: profile7,
             career: [
                 "서울예술대학교 실용음악과(일렉기타) 졸업",
                 "밴쿠버 동계올림픽 음악감독",
@@ -96,7 +113,7 @@ const teacherInfoList: TeacherInfoList = {
         },
         {
             name: "성민선",
-            profile: "/image/teacher/human/8.jpg",
+            profile: profile8,
             career: [
                 "한양대ERICA 재즈피아노과(일렉기타) 졸업",
                 "JYP.Ent 음악감독",
@@ -109,7 +126,7 @@ const teacherInfoList: TeacherInfoList = {
     saxophone: [
         {
             name: "박혜준",
-            profile: "/image/teacher/human/9.jpg",
+            profile: profile9,
             career: [
                 "서울예술대학교 실용음악과(일렉기타) 졸업",
                 "밴쿠버 동계올림픽 음악감독",
@@ -120,7 +137,7 @@ const teacherInfoList: TeacherInfoList = {
         },
         {
             name: "양도훈",
-            profile: "/image/teacher/human/10.jpg",
+            profile: profile10,
             career: [
                 "한양대ERICA 재즈피아노과(일렉기타) 졸업",
                 "JYP.Ent 음악감독",
@@ -133,7 +150,7 @@ const teacherInfoList: TeacherInfoList = {
     midi: [
         {
             name: "제갈기정",
-            profile: "/image/teacher/human/11.jpg",
+            profile:profile11,
             career: [
                 "서울예술대학교 실용음악과(일렉기타) 졸업",
                 "밴쿠버 동계올림픽 음악감독",
@@ -144,7 +161,7 @@ const teacherInfoList: TeacherInfoList = {
         },
         {
             name: "배영남",
-            profile: "/image/teacher/human/12.jpg",
+            profile: profile12,
             career: [
                 "한양대ERICA 재즈피아노과(일렉기타) 졸업",
                 "JYP.Ent 음악감독",
@@ -157,7 +174,7 @@ const teacherInfoList: TeacherInfoList = {
     vocal: [
         {
             name: "정윤희",
-            profile: "/image/teacher/human/13.jpg",
+            profile: profile13,
             career: [
                 "서울예술대학교 실용음악과(일렉기타) 졸업",
                 "밴쿠버 동계올림픽 음악감독",
@@ -168,7 +185,7 @@ const teacherInfoList: TeacherInfoList = {
         },
         {
             name: "백채영",
-            profile: "/image/teacher/human/14.jpg",
+            profile: profile14,
             career: [
                 "한양대ERICA 재즈피아노과(일렉기타) 졸업",
                 "JYP.Ent 음악감독",

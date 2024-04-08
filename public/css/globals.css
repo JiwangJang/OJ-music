@@ -393,6 +393,10 @@ footer ul {
     .bottom-division-padding {
         padding-bottom: 60px;
     }
+
+    .light {
+        display: none;
+    }
 }
 
 /* gsap 쓰기 까다로워서 직접만드는 스크롤 기반 애니메이션 */

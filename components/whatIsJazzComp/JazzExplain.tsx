@@ -1,5 +1,6 @@
 import style from "@/app/what-is-jazz/whatIsJazz.module.css";
 import Image from "next/image";
+import onRoadImage from "@/public/image/what-is-jazz/on-road.jpg";
 
 export default function JazzExplain() {
     return (
@@ -12,7 +13,7 @@ export default function JazzExplain() {
                     이루어진다는 점과, 스윙이라는 재즈만의 리듬이 주된 차이입니다.
                 </p>
                 <div className={style.image}>
-                    <Image src={"/image/what-is-jazz/on-road.jpg"} fill sizes="100%" alt="재즈 설명사진"></Image>
+                    <Image src={onRoadImage} fill sizes="100%" alt="재즈 설명사진" placeholder="blur" priority></Image>
                 </div>
             </div>
         </div>
