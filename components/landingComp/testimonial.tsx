@@ -7,7 +7,6 @@ import { MouseEvent, TouchEvent, useEffect, useRef, useState } from "react";
 export default function Testmonial() {
     const [isStart, setIsStart] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-    const [isMobile, setIsMoblie] = useState(false);
     const testimonialRef = useRef<HTMLDivElement>(null);
     const posRef = useRef<number>(0);
     const firstPointRef = useRef<number>(0);
@@ -19,8 +18,6 @@ export default function Testmonial() {
     // slideWidth * 12 = 전체 슬라이더 넓이(Moblie)
 
     useEffect(() => {
-        const isMobile = window.innerWidth < 500;
-        setIsMoblie(isMobile);
         const testimonialCard: HTMLDivElement | null = document.querySelector(".testimonial-card");
         if (!testimonialRef.current) return;
         if (testimonialCard) {

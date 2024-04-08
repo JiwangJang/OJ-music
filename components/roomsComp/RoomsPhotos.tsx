@@ -11,11 +11,12 @@ import roomImage_8 from "@/public/image/rooms/8.jpg";
 import roomImage_9 from "@/public/image/rooms/9.jpg";
 import style from "@/app/rooms/rooms.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RoomsPhotos() {
-    const [room, setRoom] = useState("");
+    const [isMobile, setIsMobile] = useState(false);
 
+    useEffect(() => setIsMobile(/Mobi/i.test(window.navigator.userAgent)), []);
     const rooms = [
         {
             roomName: "피아노연습실",
@@ -58,7 +59,7 @@ export default function RoomsPhotos() {
     return (
         <div className="container division-padding">
             <p className="head-2">시설안내</p>
-            <div className={style.roomImageContainer}>
+            <div className={style.roomImageContainer} data-mobile={isMobile}>
                 {rooms.map(({ roomName, image }, i) => (
                     <div key={i} className={style.roomImage} data-roomname={roomName}>
                         <Image
