@@ -1,0 +1,52 @@
+.roomImageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.roomImage {
+    position: relative;
+    max-width: 392px;
+    max-height: 392px;
+    height: 30vw;
+    width: 30vw;
+    flex-grow: 1;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.roomImage::after {
+    content: attr(data-roomname);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 12px;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.roomImage:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 810px) {
+    .roomImageContainer {
+        gap: 1vw;
+        margin-top: 2vw;
+    }
+
+    .roomImage:last-child {
+        max-width: none;
+    }
+
+    .roomImage::after {
+        font-size: 3vw;
+        padding: 2vw 0;
+    }
+}
